@@ -22,8 +22,11 @@ class Category(MPTTModel):
         order_insertion_name = ['name']
 
 class Type(models.Model):
-    T_id = models.ForeignKey()
+    T_id = models.CharField(max_length=50, unique=True)
     T_name = models.CharField(verbose_name='Subject', max_length="200")
+    def __str__(self):
+        return self.name
+
 
 class Entity(models.Model):
     E_id = models.CharField(verbose_name='Nomber Event', db_index=True, max_length=10)
