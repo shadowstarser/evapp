@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from mptt.models import MPTTModel, TreeForeignKey
@@ -20,9 +21,14 @@ class Category(MPTTModel):
     class MPTTMeta:
         order_insertion_name = ['name']
 
+class Type(models.Model):
+    T_id = models.ForeignKey()
+    T_name = models.CharField((verbose_name='Subject', max_length="200"))
+
 class Entity(models.Model):
     E_id = models.CharField(verbose_name='Nomber Event', db_index=True, max_length=10)
-    E_type = models.ForeignKey()
+    E_type = models.ForeignKey(Type, verbose_name='Type Entity',  on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='User' , on_delete=models.CASCADE)
     E_Category = models.ForeignKey(Category, verbose_name='Category', on_delete=models.CASCADE)
     E_subject = models.CharField(verbose_name='Subject', max_length="200")
     E_note = models.TextField(verbose_name='Descriptions', max_length="10000")
