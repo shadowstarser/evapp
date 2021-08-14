@@ -23,7 +23,7 @@ class Category(MPTTModel):
 
 class Type(models.Model):
     T_id = models.ForeignKey()
-    T_name = models.CharField((verbose_name='Subject', max_length="200"))
+    T_name = models.CharField(verbose_name='Subject', max_length="200")
 
 class Entity(models.Model):
     E_id = models.CharField(verbose_name='Nomber Event', db_index=True, max_length=10)
